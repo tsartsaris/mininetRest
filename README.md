@@ -30,6 +30,7 @@ At the moment the REST API allows:
 * set an interface of a node up or down.
 * set the bandwidth and delay of an interface of a node.
 * execute a command in a node.
+* get mac address of a host
 
 ## How is it implemented?
 MininetRest class at file `mininet_rest.py` is the core of mininetRest. 
@@ -37,8 +38,7 @@ It is a derived class of the Bottle class (http://bottlepy.org/docs/dev/index.ht
 
 ## Authoring
 
-* Carlos Giraldo
-carlitosgiraldo@gmail.com
-AtlantTIC Research Center, University of Vigo, Spain
-http://atlanttic.uvigo.es/en/
+* Tsartsaris Sotirios
+
+This is a fork, original project at https://github.com/cgiraldo/mininetRest by Carlos Giraldo 
 
