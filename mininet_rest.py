@@ -7,14 +7,14 @@ MininetRest adds a REST API to mininet.
 
 """
 
-__author__ = 'Carlos Giraldo'
-__copyright__ = "Copyright 2015, AtlantTIC - University of Vigo"
-__credits__ = ["Carlos Giraldo"]
+__author__ = 'Tsartsaris Sotirios'
+__copyright__ = "Copyright 2015, University of Macedonia"
+__credits__ = ["Carlos Giraldo","Tsartsaris Sotirios"]
 __license__ = "GPL"
-__version__ = "0.0.1"
-__maintainer__ = "Carlos Giraldo"
-__email__ = "carlitosgiraldo@gmail.com"
-__status__ = "Prototype"
+__version__ = "0.0.2"
+__maintainer__ = "Tsartsaris Sotirios"
+__email__ = "info@tsartsaris.gr"
+__status__ = "Development"
 
 
 class MininetRest(Bottle):
@@ -30,6 +30,7 @@ class MininetRest(Bottle):
         self.route('/hosts', method='GET', callback=self.get_hosts)
         self.route('/switches', method='GET', callback=self.get_switches)
         self.route('/links', method='GET', callback=self.get_links)
+        self.route('/mac/<host_name>', method='GET', callback=self.get_host_mac)
 
     def get_nodes(self):
         return {'nodes': [n for n in self.net]}
@@ -69,6 +70,9 @@ class MininetRest(Bottle):
         return {'links': [dict(name=l.intf1.node.name + '-' + l.intf2.node.name,
                                node1=l.intf1.node.name, node2=l.intf2.node.name,
                                intf1=l.intf1.name, intf2=l.intf2.name) for l in self.net.links]}
+                               
+    def get_host_mac(self, host_name):
+        return {str(host_name)+' mac': [h.MAC() for h in self.net.hosts if h.name == host_name]}
 
     def do_cmd(self, node_name):
         args = request.body.read()
